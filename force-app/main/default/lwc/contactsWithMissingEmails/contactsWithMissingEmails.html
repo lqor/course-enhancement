@@ -1,0 +1,24 @@
+<template>
+    <lightning-card title="Contacts Without Emails" icon-name="standard:contact">
+        <template if:true={contacts.data}>
+            <table class="slds-table">
+                <thead>
+                    <tr>
+                        <th>Contact Name</th>
+                        <th>Phone</th>
+                        <th>Owner</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={contacts.data} for:item="contact">
+                        <tr key={contact.Id}>
+                            <td>{contact.Name}</td>
+                            <td>{contact.Phone}</td>
+                            <td>{contact.Owner.Name}</td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </template>
+    </lightning-card>
+</template>
