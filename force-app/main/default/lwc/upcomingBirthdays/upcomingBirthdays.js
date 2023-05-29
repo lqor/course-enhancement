@@ -1,7 +1,5 @@
-import { LightningElement, wire } from 'lwc';
-import { getRecord } from 'lightning/uiRecordApi';
-import findBirthdaysThisWeek from '@salesforce/apex/UpcomingBirthdaysController.findBirthdaysThisWeek';
+import { LightningElement } from 'lwc';
 
 export default class UpcomingBirthdays extends LightningElement {
-    @wire(findBirthdaysThisWeek) contacts;
+    
 }

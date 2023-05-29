@@ -1,4 +1,9 @@
-<apex:page standardController="Training__c" renderAs="pdf">
+<apex:page standardController="Training__c" 
+           extensions="SaveTrainingPdfController" 
+           showHeader="false" 
+           sidebar="false" 
+           renderAs="pdf" 
+           applyBodyTag="false">
     <head>
         <style>
             @page {
@@ -6,40 +11,51 @@
                 background-image: url("{!$Resource.FlyerBackground}");
                 background-repeat: no-repeat !important; 
                 background-position: center center !important;
-                background-size: 100% 100% !important;
-
-                @top-center {
-                    content: element(header);
-                }
-
-                @bottom-center {
-                    content: element(footer);
-                }                
+                background-size: 100% 100% !important;             
             }
-            body {font-family: Arial, sans-serif;}
-            h1 {font-size: 24px; font-weight: bold;}
-            h2 {font-size: 20px; font-weight: bold;}
-            h3 {font-size: 16px; font-weight: bold;}
-            p {font-size: 14px;}
-            .section {margin-bottom: 20px;}
-            .location {white-space: pre-line;}
+
+            .training {
+                margin-left: 1cm; 
+                margin-top: 5cm;
+                font-size: 60px;
+                position: absolute;
+                white-space: nowrap;
+            }
+
+            .trainer {
+                margin-left: 1cm; 
+                margin-top: 7.8cm;
+                font-size: 30px;
+                position: absolute;
+                white-space: nowrap;
+            }
+
+            .training-date {
+                margin-left: 1cm; 
+                margin-top: 8.8cm;
+                font-size: 25px;
+                position: absolute;
+                white-space: nowrap;
+            }
         </style>
     </head>
     <body>
-        <h1>Training Details</h1>
-        <div class="section">
-            <h2>Schedule</h2>
-            <p>{!Training__c.StartDate__c} - {!Training__c.EndDate__c}</p>
+        <div class="training">
+            <p>{!Training__c.Name}</p>
         </div>
-        <div class="section">
-            <h2>Training Venue</h2>
-            <h3>{!Training__c.Restaurant__r.Name}</h3>
-            <p class="location">{!Training__c.Restaurant__r.Location__c}</p>
-            <p>{!Training__c.Restaurant__r.Email__c}</p>
+        <div class="trainer">
+            <p>By {!Training__c.Trainer__r.Name}</p>
         </div>
-        <div class="section">
-            <h2>Trainer</h2>
-            <p>{!Training__c.Trainer__r.Name}</p>
+        <div class="training-date">
+            <p>
+                <apex:outputText value="{0,date,dd.MM.yyyy}">
+                    <apex:param value="{!Training__c.StartDate__c}" />
+                </apex:outputText>
+                - &nbsp;
+                <apex:outputText value="{0,date,dd.MM.yyyy}">
+                    <apex:param value="{!Training__c.EndDate__c}" />
+                </apex:outputText>
+            </p>
         </div>
     </body>
 </apex:page>
